@@ -1,4 +1,5 @@
 import { useState } from "react";
+import emailjs from "@emailjs/browser";
 
 export default function App() {
   const [email, setEmail] = useState("");
@@ -7,6 +8,18 @@ export default function App() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!email) return;
+    
+    emailjs.send(
+      "service_nrln1rd",    
+      "template_mxbhadg",    
+      { email: email }, 
+      "C99uWFpEL8_Cjb0CK"      
+    )
+    .then(() => {
+      console.log("Email sent successfully!");
+      setSubmitted(true);
+    })
+    .catch((err) => console.error("Error:", err));
     console.log("Beta tester signup:", email);
     setSubmitted(true);
   };
